@@ -23,19 +23,15 @@ pipeline {
         }
         stage('executar testes'){
             steps{
-                sh 'NO_COLOR=1 npm run cy:run | true'
-                sh 'npm run cy:report'
+                sh 'NO_COLOR=1 npm run cy:run'
             }
         }
         stage('gerar relatorio'){
             steps{
+                sh 'npm run cy:report'
                 publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'mochawesome-report', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: '', useWrapperFileDirectly: true])
             }
         }        
-                stage('fechar servidor'){
-            steps{
-                sh 'npm run end'
-            }
-        }
+
     }
 }
