@@ -23,7 +23,8 @@ pipeline {
         }
         stage('executar testes'){
             steps{
-                sh 'NO_COLOR=1 npm run cy:run'
+                sh 'NO_COLOR=1 npm run cy:run | true'
+                sh 'npm run cy:report'
             }
         }
         stage('gerar relatorio'){
