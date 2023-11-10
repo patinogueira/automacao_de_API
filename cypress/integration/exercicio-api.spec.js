@@ -34,6 +34,19 @@ describe('Testes da Funcionalidade Usuários', () => {
 
      });
 
+     it('Deve validar mensagem de email inválido', () => {
+
+          let nome = faker.person.firstName()
+          let senha = faker.internet.password()
+
+          cy.cadastrarUsuario(nome,'frodo.b@' , senha)
+               .then((response) => {
+                    expect(response.status).to.equal(400)
+                    expect(response.body.email).to.equal('email deve ser um email válido')
+               })
+
+     });
+
      it('Deve validar um usuário com email inválido', () => {
 
           let nome = faker.person.firstName()
